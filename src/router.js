@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import TheWelcome from "@/components/TheWelcome.vue";
 import ResultTab from "@/components/ResultTab.vue";
+import ListEpreuve from "@/components/ListEpreuve.vue";
 
 const routes = [
     {
@@ -10,6 +11,10 @@ const routes = [
     {
         path: '/test',
         component: ResultTab
+    },
+    {
+        path: '/epreuve',
+        component: ListEpreuve
     }
     // Ajoutez d'autres routes ici au besoin
 ];
