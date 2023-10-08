@@ -1,61 +1,93 @@
 <script setup>
 import axios from "axios";
 
-axios.get("http://127.0.0.1:9007/epreuve_athlete/64")
-    .then(response => {
-      // Gérer la réponse ici
-      const data = response.data;
+function calculerAge(dateNaissance) {
+  const dateNaissanceObj = new Date(dateNaissance);
+  const dateActuelle = new Date();
 
-      const epreuveLength = Object.keys(data.epreuve).length;
-      const athleteLength = Object.keys(data.athlete).length;
+  const anneeNaissance = dateNaissanceObj.getFullYear();
+  const moisNaissance = dateNaissanceObj.getMonth();
+  const jourNaissance = dateNaissanceObj.getDate();
 
-      console.log('Réponse de la requête :', data);
+  const anneeActuelle = dateActuelle.getFullYear();
+  const moisActuel = dateActuelle.getMonth();
+  const jourActuel = dateActuelle.getDate();
 
-      const tbodyresult = document.getElementById("tbody-result");
+  let age = anneeActuelle - anneeNaissance;
 
-      for (let i = 0; i < athleteLength; i++) {
+  if (moisActuel < moisNaissance || (moisActuel === moisNaissance && jourActuel < jourNaissance)) {
+    age--;
+  }
 
-        console.log(data.athlete.nom);
-      }
+  return age;
+}
 
-      const tr = "<tr>" +
-          "          <td>AGBEGNENOU</td>" +
-          "          <td>Clarisseo</td>" +
-          "          <td>31</td>" +
-          "          <td>FRANCE</td>" +
+function getTabResult(id) {
+  axios.get("http://127.0.0.1:9007/epreuve_athlete/"+id).then(response => {
+    // Gérer la réponse ici
+    const data = response.data.sort((a, b) => a.place - b.place);
+    const app = document.getElementById("app");
+    app.innerHTML += '<div id="div-background-result-tab">' +
+        '    <div id="div-result-tab">' +
+        '      <table id="result-tab" class="table table-striped table-dark">' +
+        '        <thead>' +
+        '        <tr>' +
+        '          <th>Nom</th>' +
+        '          <th>Prénom</th>' +
+        '          <th>Age</th>' +
+        '          <th>Pays</th>' +
+        '          <th>Résultat</th>' +
+        '        </tr>' +
+        '        </thead>' +
+        '        <tbody id="tbody-result">' +
+        '        </tbody>' +
+        '      </table>' +
+        '    </div>' +
+        '  </div>';
+
+    const dataLength = Object.keys(data).length;
+
+    console.log('Réponse de la requête :', data);
+
+    const tbodyresult = document.getElementById("tbody-result");
+
+    let tr = "";
+
+    for (let i = 0; i < dataLength; i++) {
+
+      console.log(data[i].athlete.nom);
+      tr += "<tr>" +
+          "          <td>"+data[i].athlete.nom+"</td>" +
+          "          <td>"+data[i].athlete.prenom+"</td>" +
+          "          <td>"+calculerAge(data[i].athlete.date_naissance)+"</td>" +
+          "          <td>"+data[i].athlete.pays.libelle+"</td>" +
+          "          <td>"+data[i].place+"</td>" +
           "        </tr>";
+    }
+    tbodyresult.innerHTML = tr;
+  })
+  .catch(error => {
+    // Gérer les erreurs ici
+    console.error('Erreur lors de la requête :', error);
+  });
+}
 
-      tbodyresult.innerHTML = tr;
+document.addEventListener("DOMContentLoaded", function () {
+  const testButton = document.querySelector("#test-button");
 
-
-    })
-    .catch(error => {
-      // Gérer les erreurs ici
-      console.error('Erreur lors de la requête :', error);
+  if (testButton) {
+    testButton.addEventListener("click", function () {
+      getTabResult(64);
     });
+  }
+});
 
 </script>
 
 <template>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <div id="div-background-result-tab">
-    <div id="div-result-tab">
-      <table id="result-tab" class="table table-striped table-dark">
-        <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Age</th>
-          <th>Pays</th>
-        </tr>
-        </thead>
-        <tbody id="tbody-result">
 
-        </tbody>
-      </table>
-    </div>
-  </div>
-
+  <p class="btn-tabresult" id="64">Test sur le sport 64</p>
 </template>
 
 <style scoped>
