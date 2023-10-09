@@ -63,15 +63,39 @@ axios.get("http://localhost:9007/epreuves").then(response => {
   const divListAffichageEpreuve = document.getElementById("div-list-affichage-epreuve");
 
 
+  let color = true;
   for (let i = 0; i < data.length; i++) {
-    const le = "<div class=\"div-content-epreuve\">\n" +
-        "        <p>"+ data[i].libelle +"</p>\n" +
-        "        <p class='btnTabresult' id='buttonResultat'>Resultat</p>\n" +
+    const le = "<div class=\"div-content-epreuve\" id=\"div-content-epreuve\">\n" +
+        "        <span>"+ data[i].libelle +"</span>\n" +
+        "        <span class='btnTabresult' id='buttonResultat'>Resultat</span>\n" +
         "      </div>";
     divListAffichageEpreuve.innerHTML += le;
     const buttonResultat = document.getElementById("buttonResultat");
     buttonResultat.id = data[i].id;
-    buttonResultat.style.color = "darkcyan";
+    buttonResultat.style.color = "#7283ED";
+
+    const divContentEpreuveId = document.getElementById("div-content-epreuve");
+    if (color){
+      divContentEpreuveId.style.backgroundColor = "#2C3034";
+      color = false;
+    }else{
+      divContentEpreuveId.style.backgroundColor = "#212529";
+      color = true;
+    }
+    divContentEpreuveId.id = "divContentEpreuve"+data[i].id;
+
+    const divContentEpreuve = document.getElementsByClassName("div-content-epreuve");
+    for (let j = 0; j < divContentEpreuve.length; j++) {
+      divContentEpreuve[j].style.display = "flex";
+      divContentEpreuve[j].style.width = "75%";
+      divContentEpreuve[j].style.height = "50px";
+      divContentEpreuve[j].style.justifyContent = "space-between";
+      divContentEpreuve[j].style.alignItems = "center";
+      divContentEpreuve[j].style.flexDirection = "row";
+      divContentEpreuve[j].style.padding = "0 30px 0 30px";
+      divContentEpreuve[j].style.color = "#FFF";
+
+    }
   }
 });
 
@@ -115,5 +139,15 @@ document.addEventListener("DOMContentLoaded", function () {
 </template>
 
 <style scoped>
+#div-list-epreuve{
+  width: 100%;
+}
+#div-list-affichage-epreuve{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 </style>
