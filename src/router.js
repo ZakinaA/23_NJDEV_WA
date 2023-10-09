@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import TheWelcome from "@/components/TheWelcome.vue";
 import ResultTab from "@/components/ResultTab.vue";
-import ListEpreuve from "@/components/ListEpreuve.vue";
+import ListEpreuves from "@/components/ListEpreuves.vue";
 
 const routes = [
     {
@@ -13,8 +13,8 @@ const routes = [
         component: ResultTab
     },
     {
-        path: '/epreuve',
-        component: ListEpreuve
+        path: '/epreuves',
+        component: ListEpreuves
     }
     // Ajoutez d'autres routes ici au besoin
 ];

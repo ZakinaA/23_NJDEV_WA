@@ -1,6 +1,6 @@
 <template>
     <router-link to="/">Accueil</router-link>
-    <router-link to="/epreuve">Epreuve</router-link>
+    <router-link to="/epreuves">Epreuves</router-link>
 
     <router-view></router-view>
 </template>
