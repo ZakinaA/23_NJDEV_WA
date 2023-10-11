@@ -71,7 +71,7 @@
   color: var(--color-text);
 }
 #result-tab tbody tr:nth-child(even) {
-  background-color: var(--color-text); /* Couleur de fond pour les lignes paires */
+  background-color: var(--color-background-mute); /* Couleur de fond pour les lignes paires */
 }
 
 #tbody-result{
