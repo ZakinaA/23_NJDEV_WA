@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import TheWelcome from "@/components/TheWelcome.vue";
-import ResultTab from "@/components/ResultTab.vue";
 import ListEpreuves from "@/components/ListEpreuves.vue";
+import AdminPanelResultat from "@/components/AdminPanelResultat.vue";
 
 const routes = [
     {
@@ -9,8 +9,8 @@ const routes = [
         component: TheWelcome
     },
     {
-        path: '/test',
-        component: ResultTab
+        path: '/admin',
+        component: AdminPanelResultat
     },
     {
         path: '/epreuves',
