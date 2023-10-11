@@ -3,23 +3,23 @@
 </script>
 
 <template>
-<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
+  <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
 
-<!--  <p class="btn-tabresult" id="64">Test sur l'epreuve 64</p><br>-->
-<!--  <p class="btn-tabresult" id="65">Test sur l'epreuve 65</p>-->
+  <!--  <p class="btn-tabresult" id="64">Test sur l'epreuve 64</p><br>-->
+  <!--  <p class="btn-tabresult" id="65">Test sur l'epreuve 65</p>-->
 
   <div id="div-background-result-tab">
     <h1 id="closeResult">x</h1>
     <div id="div-result-tab">
       <table id="result-tab" class="table table-striped table-dark">
         <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Age</th>
-            <th>Pays</th>
-            <th>Résultat</th>
-          </tr>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Age</th>
+          <th>Pays</th>
+          <th>Résultat</th>
+        </tr>
         </thead>
         <tbody id="tbody-result">
         </tbody>
