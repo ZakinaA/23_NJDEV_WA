@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
 
 <!--  <p class="btn-tabresult" id="64">Test sur l'epreuve 64</p><br>-->
 <!--  <p class="btn-tabresult" id="65">Test sur l'epreuve 65</p>-->
@@ -44,11 +44,10 @@
 #div-result-tab{
   width: 60%;
   height: 60vh;
-  background-color: beige;
   display: flex;
   justify-content: center;
+  background-color: var(--color-background);
   align-items: start;
-  background-color: #212529;
   border-radius: 20px;
 }
 
@@ -63,15 +62,22 @@
   width: 95%;
   height: 95%;
   margin: 0;
+  border-collapse:collapse;
+  text-align: center;
 }
 
 #result-tab tr{
   height: 1em;
+  color: var(--color-text);
+}
+#result-tab tbody tr:nth-child(even) {
+  background-color: var(--color-text); /* Couleur de fond pour les lignes paires */
 }
 
 #tbody-result{
   max-height: 300px;
   overflow-y: auto;
 }
+
 
 </style>
