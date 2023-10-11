@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import TheWelcome from "@/components/TheWelcome.vue";
 import ResultTab from "@/components/ResultTab.vue";
 import ListEpreuves from "@/components/ListEpreuves.vue";
+import DashboardResult from "@/components/DashboardResult.vue";
 
 const routes = [
     {
@@ -9,8 +10,8 @@ const routes = [
         component: TheWelcome
     },
     {
-        path: '/test',
-        component: ResultTab
+        path: '/Dashboard',
+        component: DashboardResult
     },
     {
         path: '/epreuves',
