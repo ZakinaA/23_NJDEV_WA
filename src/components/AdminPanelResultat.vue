@@ -1,6 +1,7 @@
 <script setup>
 
 import axios from "axios";
+import AdminPanelResultatModif from "@/components/AdminPanelResultatModif.vue";
 
 
 function getSport() {
@@ -80,15 +81,29 @@ function getAthlete() {
     for (let i = 0; i < dataLength; i++) {
       console.log(optionId + " " + data[i].epreuve.id);
       if (optionId == data[i].epreuve.id){
-        tr += "\n" +
-            "        <tr>\n" +
+        tr += "        <tr>\n" +
             "          <th>"+ data[i].athlete.pays.libelle +"</th>\n" +
             "          <th>"+ data[i].athlete.nom + " "+ data[i].athlete.prenom +"</th>\n" +
             "          <th>"+ data[i].place +"</th>\n" +
+            "          <th><a class='btnModifResult' id='athlete" + data[i].athlete.id +"'>Resultat</a></th>\n" +
             "        </tr>";
       }
     }
     tbodyTableauAthleteResultat.innerHTML = tr;
+    setTimeout(function () {
+      const btnModifResult = document.getElementsByClassName("btnModifResult");
+      console.log(btnModifResult);
+      console.log(btnModifResult.length);
+      for (let i = 0; i < btnModifResult.length; i++) {
+
+        const id = btnModifResult[i].id;
+        const buttonResultat = document.getElementById(id);
+
+        buttonResultat.addEventListener("click", function () {
+          getTabResult(id);
+        });
+      }
+    }, 100);
   })
       .catch(error => {
         // Gérer les erreurs ici
@@ -137,6 +152,7 @@ setTimeout(function () {
             <th>Nation</th>
             <th>Nom Prénom</th>
             <th>Position</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -145,7 +161,7 @@ setTimeout(function () {
         </tbody>
       </table>
     </div>
-
+    <AdminPanelResultatModif/>
   </div>
 </template>
 
