@@ -45,12 +45,50 @@ function getEpreuve() {
     const optionId = selectedOption.value;
 
     for (let i = 0; i < dataLength; i++) {
-      console.log(optionId + " : " + data[i].sport.id)
       if (optionId == data[i].sport.id){
         tr += "<option value=\""+ data[i].id +"\">"+ data[i].libelle +"</option>";
       }
     }
     epreuve.innerHTML = tr;
+  })
+      .catch(error => {
+        // Gérer les erreurs ici
+        console.error('Erreur lors de la requête :', error);
+      });
+}
+
+function getAthlete() {
+
+  const tbodyTableauAthleteResultat = document.getElementById("tbody-tableau-athlete-resultat");
+  tbodyTableauAthleteResultat.innerHTML = "";
+  axios.get("http://127.0.0.1:9007/resultsAthletes").then(response => {
+
+    const data = response.data.sort((a, b) => a.athlete.nom - b.athlete.nom);
+
+    const dataLength = Object.keys(data).length;
+
+    // console.log('Réponse de la requête :', data);
+
+    const epreuve = document.getElementById("Epreuve");
+
+    let tr = "";
+    const tbodyTableauAthleteResultat = document.getElementById("tbody-tableau-athlete-resultat");
+
+    const selectedOption = epreuve.options[epreuve.selectedIndex];
+    const optionId = selectedOption.value;
+
+    for (let i = 0; i < dataLength; i++) {
+      console.log(optionId + " " + data[i].epreuve.id);
+      if (optionId == data[i].epreuve.id){
+        tr += "\n" +
+            "        <tr>\n" +
+            "          <th>"+ data[i].athlete.pays.libelle +"</th>\n" +
+            "          <th>"+ data[i].athlete.nom + " "+ data[i].athlete.prenom +"</th>\n" +
+            "          <th>"+ data[i].place +"</th>\n" +
+            "        </tr>";
+      }
+    }
+    tbodyTableauAthleteResultat.innerHTML = tr;
   })
       .catch(error => {
         // Gérer les erreurs ici
@@ -64,8 +102,14 @@ setTimeout(function () {
     getEpreuve();
   });
 
+  const epreuve = document.getElementById("Epreuve");
+  epreuve.addEventListener("change", function() {
+    getAthlete();
+  });
+
   getSport();
   getEpreuve();
+  getAthlete();
 },1);
 
 
@@ -93,8 +137,6 @@ setTimeout(function () {
             <th>Nation</th>
             <th>Nom Prénom</th>
             <th>Position</th>
-            <th>Résultat</th>
-            <th>Note</th>
           </tr>
         </thead>
 
