@@ -27,38 +27,48 @@ function getSport() {
       });
 }
 
-// function getTabResult(id) {
-//   axios.get("http://127.0.0.1:9007/epreuve_athlete/"+id).then(response => {
-//
-//     const data = response.data.sort((a, b) => a.place - b.place);
-//
-//     const dataLength = Object.keys(data).length;
-//
-//     // console.log('Réponse de la requête :', data);
-//
-//     const tbodyresult = document.getElementById("tbody-result");
-//     const divBackgroundResultTab = document.getElementById("div-background-result-tab");
-//
-//     let tr = "";
-//
-//     for (let i = 0; i < dataLength; i++) {
-//       tr += "<tr>" +
-//           "          <td>"+data[i].athlete.nom+"</td>" +
-//           "          <td>"+data[i].athlete.prenom+"</td>" +
-//           "          <td>"+calculerAge(data[i].athlete.date_naissance)+"</td>" +
-//           "          <td>"+data[i].athlete.pays.libelle+"</td>" +
-//           "          <td>"+data[i].place+"</td>" +
-//           "        </tr>";
-//     }
-//     divBackgroundResultTab.style.display = "flex";
-//     tbodyresult.innerHTML = tr;
-//   })
-//       .catch(error => {
-//         // Gérer les erreurs ici
-//         console.error('Erreur lors de la requête :', error);
-//       });
-// }
-getSport();
+function getEpreuve() {
+  axios.get("http://127.0.0.1:9007/epreuves").then(response => {
+
+    const data = response.data.sort((a, b) => a.libelle - b.libelle);
+
+    const dataLength = Object.keys(data).length;
+
+    // console.log('Réponse de la requête :', data);
+
+    const epreuve = document.getElementById("Epreuve");
+
+    let tr = "";
+    const sport = document.getElementById("Sport");
+
+    const selectedOption = sport.options[sport.selectedIndex];
+    const optionId = selectedOption.value;
+
+    for (let i = 0; i < dataLength; i++) {
+      console.log(optionId + " : " + data[i].sport.id)
+      if (optionId == data[i].sport.id){
+        tr += "<option value=\""+ data[i].id +"\">"+ data[i].libelle +"</option>";
+      }
+    }
+    epreuve.innerHTML = tr;
+  })
+      .catch(error => {
+        // Gérer les erreurs ici
+        console.error('Erreur lors de la requête :', error);
+      });
+}
+
+setTimeout(function () {
+  const sport = document.getElementById("Sport");
+  sport.addEventListener("change", function() {
+    getEpreuve();
+  });
+
+  getSport();
+  getEpreuve();
+},1);
+
+
 </script>
 
 <template>
