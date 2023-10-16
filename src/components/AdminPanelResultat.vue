@@ -91,12 +91,16 @@ function showModif(epreuveId, athleteId) {
           divBackgroundResultModif.style.display = "none";
         });
         const submitResult = document.getElementById("submitResult");
-        submitResult.addEventListener("click", function () {
+        const clonedsubmitResult = submitResult.cloneNode(true);
+
+        submitResult.parentNode.replaceChild(clonedsubmitResult, submitResult);
+
+        clonedsubmitResult.addEventListener("click", function () {
           saveResult(data[i], position.value);
-          setTimeout(function (){
+          setTimeout(function () {
             getAthlete();
             divBackgroundResultModif.style.display = "none";
-          },100);
+          }, 100);
         });
 
       }
@@ -105,6 +109,7 @@ function showModif(epreuveId, athleteId) {
 }
 
 function saveResult(data, place) {
+  console.log(data.id + place);
   const currentDate = new Date().toISOString().split('T')[0];
 
   axios.put("http://127.0.0.1:9007/resultatAthlete/"+data.id, {athlete: {id:data.athlete.id}, epreuve:{id:data.epreuve.id}, place: place, dateResultat:currentDate}).then(response => {
@@ -120,7 +125,7 @@ function getAthlete() {
   tbodyTableauAthleteResultat.innerHTML = "";
   axios.get("http://127.0.0.1:9007/resultsAthletes").then(response => {
 
-    const data = response.data.sort((a, b) => a.athlete.nom - b.athlete.nom);
+    const data = response.data.sort((a, b) => a.place - b.place);
 
     const dataLength = Object.keys(data).length;
 
