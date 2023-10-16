@@ -82,9 +82,21 @@ function showModif(epreuveId, athleteId) {
           position.value = data[i].place;
         }
         divBackgroundResultModif.style.display = "flex";
+
+        const closeResult = document.getElementById("closeResult");
+        console.log(closeResult);
+        closeResult.addEventListener("click", function () {
+          const divBackgroundResultModif = document.getElementById("div-background-result-modif");
+          console.log(divBackgroundResultModif);
+          divBackgroundResultModif.style.display = "none";
+        });
         const submitResult = document.getElementById("submitResult");
         submitResult.addEventListener("click", function () {
           saveResult(data[i], position.value);
+          setTimeout(function (){
+            getAthlete();
+            divBackgroundResultModif.style.display = "none";
+          },100);
         });
 
       }
@@ -152,6 +164,8 @@ function getAthlete() {
         console.error('Erreur lors de la requête :', error);
       });
 }
+
+
 
 setTimeout(function () {
   const sport = document.getElementById("Sport");

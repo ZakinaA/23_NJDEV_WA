@@ -9,10 +9,8 @@
     <div id="div-result-modif">
 
       <h3 id="h3-modif">Modification de </h3>
-      <form>
-        <input type="number" min="0" step="1" id="position"/>
-        <input type="submit" value="VALIDER" id="submitResult">
-      </form>
+      <input type="number" min="0" step="1" id="position"/>
+      <input type="submit" value="VALIDER" id="submitResult">
 
     </div>
   </div>
