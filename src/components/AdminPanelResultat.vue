@@ -47,7 +47,7 @@ function getEpreuve() {
     const optionId = selectedOption.value;
 
     for (let i = 0; i < dataLength; i++) {
-      if (optionId == data[i].sport.id){
+      if (parseInt(optionId) === parseInt(data[i].sport.id)){
         tr += "<option value=\""+ data[i].id +"\">"+ data[i].libelle +"</option>";
       }
     }
@@ -100,7 +100,7 @@ function showModif(epreuveId, athleteId) {
           setTimeout(function () {
             getAthlete();
             divBackgroundResultModif.style.display = "none";
-          }, 100);
+          }, 500);
         });
 
       }
@@ -140,7 +140,7 @@ function getAthlete() {
     const optionId = selectedOption.value;
 
     for (let i = 0; i < dataLength; i++) {
-      if (optionId == data[i].epreuve.id){
+      if (parseInt(optionId) === parseInt(data[i].epreuve.id)){
         tr += "        <tr>\n" +
             "          <th>"+ data[i].athlete.pays.libelle +"</th>\n" +
             "          <th>"+ data[i].athlete.nom + " "+ data[i].athlete.prenom +"</th>\n" +
