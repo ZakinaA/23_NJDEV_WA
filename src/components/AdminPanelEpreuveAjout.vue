@@ -24,7 +24,7 @@ function ajoutEpreuve(){
   const textAreaDateDebut = document.getElementById("textarea-insert-date-debut-epreuve");
   const textAreaDateFin = document.getElementById("textarea-insert-date-fin-epreuve");
   const textAreaLibelle= document.getElementById("text-area-insert-libelle-epreuve");
-  const selectSportAffichage = document.getElementById("option-select-sport");
+  const selectSportAffichage = document.getElementById("list-epreuve-sport");
   const messageInsertionvalider = document.getElementById("message-donner-ajouter");
 
   const le = "<p> Donner Enregistrer</p>";
@@ -33,7 +33,9 @@ function ajoutEpreuve(){
   const date_Debut = textAreaDateDebut.value;
   const date_Fin = textAreaDateFin.value;
   const libelle = textAreaLibelle.value;
-  const sport = selectSportAffichage.value;
+
+  const selectedOption = selectSportAffichage.options[selectSportAffichage.selectedIndex];
+  const sport = selectedOption.value;
 
   console.log(sport);
 
