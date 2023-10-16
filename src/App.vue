@@ -1,5 +1,4 @@
 <template>
-
   <header id="header-menu">
 
   <router-link to="/">Accueil</router-link>

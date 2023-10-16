@@ -3,6 +3,7 @@
 </script>
 
 <template>
+
   <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
 
   <!--  <p class="btn-tabresult" id="64">Test sur l'epreuve 64</p><br>-->
@@ -73,7 +74,8 @@
   color: var(--color-text);
 }
 #result-tab tbody tr:nth-child(even) {
-  background-color: var(--color-text); /* Couleur de fond pour les lignes paires */
+  background-color: var(--color-background-mute); /* Couleur de fond pour les lignes paires */
+
 }
 
 #tbody-result{
