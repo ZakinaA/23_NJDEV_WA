@@ -3,7 +3,7 @@
 
   <router-link to="/">Accueil</router-link>
   <router-link to="/epreuves">Epreuves</router-link>
-  <router-link to="/Test">Test</router-link>
+  <router-link to="/admin">Admin</router-link>
 
   </header>
   <div id="div-view-router">
