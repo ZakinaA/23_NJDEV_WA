@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import TheWelcome from "@/components/TheWelcome.vue";
 import ListEpreuves from "@/components/ListEpreuves.vue";
 import AdminPanelResultat from "@/components/AdminPanelResultat.vue";
+import AdminPanel from "@/components/AdminPanel.vue";
 
 const routes = [
     {
@@ -10,7 +11,7 @@ const routes = [
     },
     {
         path: '/admin',
-        component: AdminPanelResultat
+        component: AdminPanel
     },
     {
         path: '/epreuves',
