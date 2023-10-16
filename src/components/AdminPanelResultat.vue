@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import AdminPanelResultatModif from "@/components/AdminPanelResultatModif.vue";
+import {isReadonly} from "vue";
 
 
 function getSport() {
@@ -58,6 +59,49 @@ function getEpreuve() {
       });
 }
 
+function showModif(epreuveId, athleteId) {
+  const divBackgroundResultModif = document.getElementById("div-background-result-modif");
+  const h3Modif = document.getElementById("h3-modif");
+  const position = document.getElementById("position");
+
+
+
+  axios.get("http://127.0.0.1:9007/resultatAthlete/"+epreuveId).then(response => {
+
+    const data = response.data.sort((a, b) => a.athlete.nom - b.athlete.nom);
+
+    const dataLength = Object.keys(data).length;
+
+    for (let i = 0; i < dataLength; i++) {
+      if ("athlete"+data[i].athlete.id === athleteId){
+        console.log(data[i]);
+        h3Modif.innerText = "Modification de " + data[i].athlete.nom + " " + data[i].athlete.prenom;
+        if (data[i].place === null){
+          position.value = 0;
+        }else{
+          position.value = data[i].place;
+        }
+        divBackgroundResultModif.style.display = "flex";
+        const submitResult = document.getElementById("submitResult");
+        submitResult.addEventListener("click", function () {
+          saveResult(data[i], position.value);
+        });
+
+      }
+    }
+  })
+}
+
+function saveResult(data, place) {
+  const currentDate = new Date().toISOString().split('T')[0];
+
+  axios.put("http://127.0.0.1:9007/resultatAthlete/"+data.id, {athlete: {id:data.athlete.id}, epreuve:{id:data.epreuve.id}, place: place, dateResultat:currentDate}).then(response => {
+    console.log('Mise à jour réussie !', response.data);
+  }).catch(error => {
+    console.error('Erreur lors de la mise à jour :', error);
+  });
+}
+
 function getAthlete() {
 
   const tbodyTableauAthleteResultat = document.getElementById("tbody-tableau-athlete-resultat");
@@ -79,31 +123,29 @@ function getAthlete() {
     const optionId = selectedOption.value;
 
     for (let i = 0; i < dataLength; i++) {
-      console.log(optionId + " " + data[i].epreuve.id);
       if (optionId == data[i].epreuve.id){
         tr += "        <tr>\n" +
             "          <th>"+ data[i].athlete.pays.libelle +"</th>\n" +
             "          <th>"+ data[i].athlete.nom + " "+ data[i].athlete.prenom +"</th>\n" +
             "          <th>"+ data[i].place +"</th>\n" +
-            "          <th><a class='btnModifResult' id='athlete" + data[i].athlete.id +"'>Resultat</a></th>\n" +
+            "          <th><a class='btnModifResult' value='"+data[i].athlete.id+"' id='athlete" + data[i].athlete.id +"'>Resultat</a></th>\n" +
             "        </tr>";
       }
     }
     tbodyTableauAthleteResultat.innerHTML = tr;
     setTimeout(function () {
       const btnModifResult = document.getElementsByClassName("btnModifResult");
-      console.log(btnModifResult);
-      console.log(btnModifResult.length);
       for (let i = 0; i < btnModifResult.length; i++) {
-
-        const id = btnModifResult[i].id;
-        const buttonResultat = document.getElementById(id);
+        const buttonResultat = document.getElementById(btnModifResult[i].id);
+        const epreuve = document.getElementById("Epreuve");
+        const selectedOption = epreuve.options[epreuve.selectedIndex];
+        const epreuveId = selectedOption.value;
 
         buttonResultat.addEventListener("click", function () {
-          getTabResult(id);
+          showModif(epreuveId,btnModifResult[i].id);
         });
       }
-    }, 100);
+    }, 10);
   })
       .catch(error => {
         // Gérer les erreurs ici

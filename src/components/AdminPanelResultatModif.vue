@@ -8,7 +8,11 @@
     <h1 id="closeResult">x</h1>
     <div id="div-result-modif">
 
-    HERE
+      <h3 id="h3-modif">Modification de </h3>
+      <form>
+        <input type="number" min="0" step="1" id="position"/>
+        <input type="submit" value="VALIDER" id="submitResult">
+      </form>
 
     </div>
   </div>
@@ -18,7 +22,7 @@
 
 #div-background-result-modif{
   position: fixed;
-  display: flex;
+  display: none;
   top: 0;
   left: 0;
   justify-content: center;
@@ -29,12 +33,13 @@
 }
 
 #div-result-modif{
-  width: 60%;
-  height: 60vh;
+  width: 20%;
+  height: 10vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   background-color: var(--color-background);
-  align-items: start;
+  align-items: center;
+  flex-direction: column;
   border-radius: 20px;
 }
 
