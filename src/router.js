@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import TheWelcome from "@/components/TheWelcome.vue";
-import ResultTab from "@/components/ResultTab.vue";
 import ListEpreuves from "@/components/ListEpreuves.vue";
 import AdminPanel from "@/components/AdminPanelEpreuve.vue";
+
 
 const routes = [
     {
@@ -10,8 +10,8 @@ const routes = [
         component: TheWelcome
     },
     {
-        path: '/test',
-        component: ResultTab
+        path: '/admin',
+        component: AdminPanel
     },
     {
         path: '/epreuves',
