@@ -28,6 +28,7 @@ function ajoutEpreuve(){
   const messageInsertionvalider = document.getElementById("message-donner-ajouter");
 
   const le = "<p> Donner Enregistrer</p>";
+  const er = "<p> Enregistrement échoué</p>";
 
   const date_Debut = textAreaDateDebut.value;
   const date_Fin = textAreaDateFin.value;
@@ -55,12 +56,17 @@ function ajoutEpreuve(){
     }, 5000);
 
     insertEpreuve = 1;
+
   }).catch(error => {
-    if (error.response.status === 403) {
-      console.error('Accès refusé. Vous n\'avez pas les autorisations nécessaires.');
-    } else {
-      console.error('Erreur lors de la requête Axios :', error);
-    }
+
+    messageInsertionvalider.innerHTML = er;
+    setTimeout(function () {
+      messageInsertionvalider.innerHTML = "";
+    }, 5000);
+
+    console.error('Erreur lors de la requête Axios :', error);
+
+    insertEpreuve = -1;
   });
 
   return insertEpreuve;
