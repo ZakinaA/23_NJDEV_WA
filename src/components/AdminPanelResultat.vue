@@ -157,6 +157,9 @@ setTimeout(function () {
   const sport = document.getElementById("Sport");
   sport.addEventListener("change", function() {
     getEpreuve();
+    setTimeout(function (){
+      getAthlete();
+    },100);
   });
 
   const epreuve = document.getElementById("Epreuve");
