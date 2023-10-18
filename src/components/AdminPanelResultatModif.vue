@@ -11,6 +11,7 @@
       <h3 id="h3-modif">Modification de </h3>
       <input type="number" min="0" step="1" id="position"/>
       <input type="submit" value="VALIDER" id="submitResult">
+      <input type="submit" value="EFFACER" id="submitEffacer">
 
     </div>
   </div>
