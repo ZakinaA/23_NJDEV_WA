@@ -25,7 +25,7 @@ function calculerAge(dateNaissance) {
   return age;
 }
 function getTabResult(id) {
-  axios.get("http://127.0.0.1:9007/epreuve_athlete/"+id).then(response => {
+  axios.get("http://127.0.0.1:9007/resultatAthlete/"+id).then(response => {
 
     const data = response.data.sort((a, b) => a.place - b.place);
 
@@ -39,13 +39,15 @@ function getTabResult(id) {
     let tr = "";
 
     for (let i = 0; i < dataLength; i++) {
+      if (data[i].place != null){
       tr += "<tr>" +
           "          <td>"+data[i].athlete.nom+"</td>" +
           "          <td>"+data[i].athlete.prenom+"</td>" +
-          "          <td>"+calculerAge(data[i].athlete.date_naissance)+"</td>" +
+          "          <td>"+calculerAge(data[i].athlete.dateNaissance)+"</td>" +
           "          <td>"+data[i].athlete.pays.libelle+"</td>" +
           "          <td>"+data[i].place+"</td>" +
           "        </tr>";
+      }
     }
     divBackgroundResultTab.style.display = "flex";
     tbodyresult.innerHTML = tr;
