@@ -130,7 +130,7 @@ h3{
 }
 
 #div-view-epreuve-ajout{
-  display: none;
+  display: block;
 }
 
 #bouton-ajouter-epreuve{
