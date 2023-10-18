@@ -103,6 +103,22 @@ function showModif(epreuveId, athleteId) {
           }, 500);
         });
 
+        const submitEffacer = document.getElementById("submitEffacer");
+        console.log(submitEffacer);
+        const clonedsubmitEffacer = submitEffacer.cloneNode(true);
+
+        submitEffacer.parentNode.replaceChild(clonedsubmitEffacer, submitEffacer);
+
+        clonedsubmitEffacer.addEventListener("click", function () {
+          delResult(data[i]);
+          setTimeout(function () {
+            getAthlete();
+            divBackgroundResultModif.style.display = "none";
+          }, 500);
+        });
+
+
+
       }
     }
   })
@@ -112,11 +128,29 @@ function saveResult(data, place) {
   console.log(data.id + place);
   const currentDate = new Date().toISOString().split('T')[0];
 
-  axios.put("http://127.0.0.1:9007/resultatAthlete/"+data.id, {athlete: {id:data.athlete.id}, epreuve:{id:data.epreuve.id}, place: place, dateResultat:currentDate}).then(response => {
+  axios.put("http://127.0.0.1:9007/resultatAthlete/"+data.id, {place: place, dateResultat:currentDate}).then(response => {
     console.log('Mise à jour réussie !', response.data);
   }).catch(error => {
     console.error('Erreur lors de la mise à jour :', error);
   });
+}
+
+function delResult(data) {
+  axios.delete("http://127.0.0.1:9007/resultatAthlete/"+data.id).then(response => {
+    console.log('Résultat suprimmé réussie !', response.data);
+  }).catch(error => {
+    console.error('Erreur lors de la suppression :', error);
+  });
+  setTimeout(function () {
+
+    axios.post("http://127.0.0.1:9007/resultatAthlete", {athlete: {id:data.athlete.id}, epreuve:{id:data.epreuve.id}}).then(response => {
+      console.log('Insertion réussie !', response.data);
+    }).catch(error => {
+      console.error('Erreur lors de l\'insertion :', error);
+    });
+    getAthlete();
+
+  },10);
 }
 
 function getAthlete() {
