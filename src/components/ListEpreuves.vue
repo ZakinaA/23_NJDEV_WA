@@ -50,6 +50,7 @@ function getTabResult(id) {
       }
     }
     divBackgroundResultTab.style.display = "flex";
+
     tbodyresult.innerHTML = tr;
   })
       .catch(error => {
@@ -103,8 +104,6 @@ axios.get("http://localhost:9007/epreuves").then(response => {
 
 setTimeout(function () {
   const closeResult = document.getElementsByClassName("btnTabresult");
-  console.log(closeResult);
-  console.log(closeResult.length);
   for (let i = 0; i < closeResult.length; i++) {
 
     const id = closeResult[i].id;
@@ -117,16 +116,22 @@ setTimeout(function () {
 }, 500);
 
 document.addEventListener("DOMContentLoaded", function () {
-  const closeResult = document.getElementById("closeResult");
-  closeResult.addEventListener("click", function () {
-    const divBackgroundResultTab = document.getElementById("div-background-result-tab");
-    divBackgroundResultTab.style.display = "none";
-  });
+  setTimeout(function () {
+
+    const closeResult = document.getElementById("closeResult");
+    console.log(closeResult);
+    closeResult.addEventListener("click", function () {
+      const divBackgroundResultTab = document.getElementById("div-background-result-tab");
+      divBackgroundResultTab.style.display = "none";
+    });
+
+  },1000);
 });
 
 </script>
 
 <template>
+
   <result-tab/>
 
   <div id="div-list-epreuve">
