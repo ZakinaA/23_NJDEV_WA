@@ -2,6 +2,7 @@
 import AdminPanelEpreuveAjout from "@/components/AdminPanelEpreuveAjout.vue";
 import AdminPanelEpreuveSupprimer from "@/components/AdminPanelEpreuveSupprimer.vue";
 import {ref} from "vue";
+import AdminPanelEpreuveModif from "@/components/AdminPanelEpreuveModif.vue";
 
 
 
@@ -60,10 +61,13 @@ function switchView(viewEpreuve) {
 
     <p id="btn-Ajout-Epreuve" @click="switchView('Ajouter')">Ajouter</p>
 
+    <p id="btn-modif-Epreuve" @click="switchView('Modifier')">Modifier</p>
+
     <p id="btn-Supp-Epreuve" @click="switchView('Supprimer')">Supprimer</p>
 
   </div>
   <AdminPanelEpreuveAjout v-if="viewEpreuveAdmin === 'Ajouter'"/>
+  <AdminPanelEpreuveModif v-if="viewEpreuveAdmin === 'Modifier'"/>
   <AdminPanelEpreuveSupprimer v-if="viewEpreuveAdmin === 'Supprimer'"/>
 
 
@@ -87,6 +91,18 @@ function switchView(viewEpreuve) {
 }
 
 #btn-Supp-Epreuve{
+  background-color: #7283ED;
+  color: white;
+
+  text-align: center;
+
+  width: 159px;
+  height: 25px;
+
+  margin-left: 15px;
+}
+
+#btn-modif-Epreuve{
   background-color: #7283ED;
   color: white;
 
